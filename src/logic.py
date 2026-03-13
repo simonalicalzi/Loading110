@@ -40,3 +40,18 @@ def proiezione_voto_laurea(media_ponderata: float) -> float:
     
     # Di solito il voto di partenza si tiene con due decimali
     return round(voto_partenza, 2)
+
+def analisi_avanzamento(esami: list, cfu_totali_percorso: int) -> dict:
+    """
+    Calcola i CFU acquisiti e la percentuale di completamento.
+    """
+    cfu_acquisiti = sum(esame.cfu for esame in esami)
+    
+    # Calcolo percentuale (evitiamo divisioni per zero)
+    percentuale = (cfu_acquisiti / cfu_totali_percorso * 100) if cfu_totali_percorso > 0 else 0
+    
+    return {
+        "cfu_acquisiti": cfu_acquisiti,
+        "cfu_mancanti": max(0, cfu_totali_percorso - cfu_acquisiti),
+        "percentuale_completamento": round(percentuale, 2)
+    }

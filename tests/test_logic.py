@@ -63,3 +63,16 @@ def test_proiezione_voto_laurea():
     # Caso 3: Media del 25.5
     # 25.5 * 11 / 3 = 93.5
     assert proiezione_voto_laurea(25.5) == 93.5
+
+from src.logic import Esame, analisi_avanzamento
+
+def test_analisi_avanzamento():
+    esami = [
+        Esame(nome="Esame 1", voto=24, cfu=12),
+        Esame(nome="Esame 2", voto=30, cfu=6)
+    ]
+    risultato = analisi_avanzamento(esami, 180)
+    
+    assert risultato["cfu_acquisiti"] == 18
+    assert risultato["cfu_mancanti"] == 162
+    assert risultato["percentuale_completamento"] == 10.0
