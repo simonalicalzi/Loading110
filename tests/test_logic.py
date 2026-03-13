@@ -7,6 +7,7 @@ def test_media_aritmetica_semplice():
     ]
     assert media_aritmetica(lista_esami) == 27.0
 
+    
 from src.logic import Esame, calcola_media_ponderata
 
 def test_media_ponderata_semplice():
@@ -36,3 +37,14 @@ def test_media_ponderata_pesi_diversi():
 
     # Il test passa se la media del caso A è maggiore della media del caso B
     assert media_a > media_b
+    
+from src.logic import Esame, calcola_media_ponderata
+
+def test_media_ponderata_e_lode():
+    esami = [
+        Esame(nome="Analisi", voto=30, cfu=12, lode=True), # 31 * 12 = 372
+        Esame(nome="Chimica", voto=18, cfu=6, lode=False)  # 18 * 6  = 108
+    ]
+    # Totale punti: 480 / Totale CFU: 18 = 26.666...
+    risultato = calcola_media_ponderata(esami)
+    assert round(risultato, 2) == 26.67

@@ -14,9 +14,18 @@ def media_aritmetica(esami: List[Esame]) -> float:
     totale_voti = sum(esame.voto for esame in esami)
     return totale_voti / len(esami)
 
-def calcola_media_ponderata(esami: list[Esame]) -> float:
+def calcola_media_ponderata(esami: list) -> float:
     if not esami:
         return 0.0
-    totale_punti = sum(e.voto * e.cfu for e in esami)
-    totale_cfu = sum(e.cfu for e in esami)
-    return totale_punti / totale_cfu
+    
+    somma_pesata = 0
+    totale_cfu = 0
+    
+    for esame in esami:
+        # Gestione lode: se l'esame ha la lode, il voto vale 31
+        voto_effettivo = 31 if (esame.voto == 30 and esame.lode) else esame.voto
+        
+        somma_pesata += voto_effettivo * esame.cfu
+        totale_cfu += esame.cfu
+        
+    return somma_pesata / totale_cfu if totale_cfu > 0 else 0.0
