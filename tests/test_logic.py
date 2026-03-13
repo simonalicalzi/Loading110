@@ -6,3 +6,5 @@ def test_media_aritmetica_semplice():
         Esame(nome="Strutture Discrete", voto=30, cfu=6)
     ]
     assert media_aritmetica(lista_esami) == 27.0
+
+    
