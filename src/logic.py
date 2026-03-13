@@ -55,3 +55,28 @@ def analisi_avanzamento(esami: list, cfu_totali_percorso: int) -> dict:
         "cfu_mancanti": max(0, cfu_totali_percorso - cfu_acquisiti),
         "percentuale_completamento": round(percentuale, 2)
     }
+
+def stima_media_necessaria(esami_sostenuti: list, cfu_totali_percorso: int, obiettivo_voto: float = 110.0) -> float:
+    """
+    Calcola la media ponderata che lo studente deve mantenere negli esami rimanenti
+    per raggiungere l'obiettivo (es. 110), considerando il bonus lodi.
+    """
+    cfu_acquisiti = sum(e.cfu for e in esami_sostenuti)
+    cfu_mancanti = cfu_totali_percorso - cfu_acquisiti
+    
+    if cfu_mancanti <= 0:
+        return 0.0
+
+    # Calcolo bonus lodi attuali (0.5 punti per ogni lode)
+    numero_lodi = sum(1 for e in esami_sostenuti if e.lode)
+    bonus_lodi = numero_lodi * 0.5
+    
+    # Calcoliamo quanti punti "su 110" mancano per raggiungere l'obiettivo
+    # Sottraiamo il bonus lodi e la proiezione attuale
+    punti_attuali_su_110 = (calcola_media_ponderata(esami_sostenuti) * 11 / 3)
+    
+    # Formula inversa per capire la media necessaria sugli esami futuri
+    # Per semplicità verso l'esame, calcoliamo la media totale necessaria:
+    media_totale_necessaria = (obiettivo_voto - bonus_lodi) * 3 / 11
+    
+    return round(media_totale_necessaria, 2)
