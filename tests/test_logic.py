@@ -76,3 +76,17 @@ def test_analisi_avanzamento():
     assert risultato["cfu_acquisiti"] == 18
     assert risultato["cfu_mancanti"] == 162
     assert risultato["percentuale_completamento"] == 10.0
+
+from src.logic import Esame, stima_media_necessaria
+
+def test_stima_media_necessaria():
+    # Studente con 2 lodi (quindi +1 punto bonus sul finale)
+    esami = [
+        Esame(nome="Esame 1", voto=30, cfu=12, lode=True),
+        Esame(nome="Esame 2", voto=30, cfu=12, lode=True)
+    ]
+    # Se l'obiettivo è 110, ma ha già 1 punto di bonus lodi, 
+    # gli serve arrivare a 109 con la media.
+    # (109 * 3) / 11 = 29.73
+    risultato = stima_media_necessaria(esami, 180, 110.0)
+    assert risultato == 29.73
