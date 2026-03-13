@@ -2,8 +2,8 @@
 Utility per il tuo rendimento accademico - Progetto Quality Development 2025/2026-
 
 # Team
-Rosalia Maria Lombardo (lialombardo)  
-Simona Li Calzi (simonalicalzi)
+Rosalia Maria Lombardo (@lialombardo)  
+Simona Li Calzi (@simonalicalzi)
 
 # Main Features
 - Calcolo media aritmetica;
