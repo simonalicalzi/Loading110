@@ -29,3 +29,14 @@ def calcola_media_ponderata(esami: list) -> float:
         totale_cfu += esame.cfu
         
     return somma_pesata / totale_cfu if totale_cfu > 0 else 0.0
+
+def proiezione_voto_laurea(media_ponderata: float) -> float:
+    
+    if media_ponderata == 0:
+        return 0.0
+    
+    # Formula: (Media * 110) / 30  =>  Media * 11 / 3
+    voto_partenza = (media_ponderata * 11) / 3
+    
+    # Di solito il voto di partenza si tiene con due decimali
+    return round(voto_partenza, 2)

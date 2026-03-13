@@ -48,3 +48,18 @@ def test_media_ponderata_e_lode():
     # Totale punti: 480 / Totale CFU: 18 = 26.666...
     risultato = calcola_media_ponderata(esami)
     assert round(risultato, 2) == 26.67
+
+from src.logic import proiezione_voto_laurea
+
+def test_proiezione_voto_laurea():
+    # Caso 1: Media del 27
+    # 27 * 11 / 3 = 9 * 11 = 99.0
+    assert proiezione_voto_laurea(27.0) == 99.0
+    
+    # Caso 2: Media del 30
+    # 30 * 11 / 3 = 10 * 11 = 110.0
+    assert proiezione_voto_laurea(30.0) == 110.0
+    
+    # Caso 3: Media del 25.5
+    # 25.5 * 11 / 3 = 93.5
+    assert proiezione_voto_laurea(25.5) == 93.5
