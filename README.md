@@ -1,11 +1,11 @@
-# Loading110
+# Loading110✅
 Utility per il tuo rendimento accademico - Progetto Quality Development 2025/2026-
 
-# Team
-Rosalia Maria Lombardo (lialombardo)  
-Simona Li Calzi (simonalicalzi)
+# 👥Team
+**Rosalia Maria Lombardo** @lialombardo   
+**Simona Li Calzi** @simonalicalzi
 
-# Main Features
+# 🛠️ Main Features
 - Calcolo media aritmetica;
 - Calcolo media ponderata;
 - Proiezione Voto di Laurea;
