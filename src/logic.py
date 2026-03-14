@@ -1,3 +1,5 @@
+# pylint: disable=missing-module-docstring, missing-class-docstring, missing-function-docstring
+
 """
 Logic functions for university grade management and graduation projection.
 """
