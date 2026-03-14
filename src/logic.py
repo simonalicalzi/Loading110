@@ -44,7 +44,7 @@ def analisi_avanzamento(esami: list[Esame], cfu_totali: int) -> dict:
 
 
 def stima_media_necessaria(
-    esami_sostenuti: list[Esame], cfu_totali: int, obiettivo: float = 110.0
+    esami_sostenuti: list[Esame], _cfu_totali: int, obiettivo: float = 110.0
 ) -> float:
     numero_lodi = sum(1 for e in esami_sostenuti if e.lode)
     bonus_lodi = numero_lodi * 0.5
