@@ -52,81 +52,77 @@ def stima_media_necessaria(
     return round(media_necessaria, 2)
 
 
-# --- INTERFACCIA DI INPUT UTENTE ---
+# --- INTERFACCIA DI INPUT E OUTPUT ---
 
 if __name__ == "__main__":
-    print("=" * 40)
+    print("\n" + "=" * 40)
     print("   BENVENUTA IN LOADING 110! 🎓")
     print("=" * 40)
 
     miei_esami = []
 
     try:
-        cfu_totali_corso = int(
-            input("Inserisci i CFU totali del tuo corso (es. 180): ")
-        )
-        obiettivo_laurea = float(
-            input("Qual è il tuo obiettivo di voto finale? (es. 110): ")
-        )
+        CFU_TOTALI_CORSO = int(input("Inserisci i CFU totali del corso (es. 180): "))
+        OBIETTIVO_LAUREA = float(input("Qual è il tuo obiettivo di voto? (es. 110): "))
     except ValueError:
-        print(
-            "Errore: Inserisci solo numeri. Userò i valori predefiniti (180 CFU, obiettivo 110)."
-        )
-        cfu_totali_corso = 180
-        obiettivo_laurea = 110.0
+        print("⚠️ Errore: Inserisci solo numeri. Uso valori standard (180, 110).")
+        CFU_TOTALI_CORSO = 180
+        OBIETTIVO_LAUREA = 110.0
 
-    print("\n--- Inserimento Esami (scrivi 'stop' nel nome per terminare) ---")
+    print("\n--- Inserimento Esami (scrivi 'stop' per terminare) ---")
 
     while True:
-        nome = input("\nNome esame: ")
-        if nome.lower() == "stop":
+        nome_input = input("\nNome esame: ")
+        if nome_input.lower() == "stop":
             break
 
         try:
-            voto = int(input(f"Voto per {nome}: "))
-            cfu = int(input(f"CFU per {nome}: "))
-            lode_input = input("Ha la lode? (s/n): ").lower()
-            lode = True if lode_input == "s" else False
+            v_voto = int(input(f"Voto per {nome_input}: "))
+            v_cfu = int(input(f"CFU per {nome_input}: "))
+            lode_prompt = input("Ha la lode? (s/n): ").lower()
 
-            nuovo_esame = Esame(nome=nome, voto=voto, cfu=cfu, lode=lode)
-            miei_esami.append(nuovo_esame)
+            ha_lode = lode_prompt == "s"
+
+            miei_esami.append(
+                Esame(nome=nome_input, voto=v_voto, cfu=v_cfu, lode=ha_lode)
+            )
 
         except ValueError:
             print("⚠️ Dati non validi per questo esame. Riprova.")
-            continue
 
     if miei_esami:
-        media_a = media_aritmetica(miei_esami)
-        media_p = calcola_media_ponderata(miei_esami)
-        proiezione = proiezione_voto_laurea(media_p)
-        info_progresso = analisi_avanzamento(miei_esami, cfu_totali_corso)
-        media_necessaria = stima_media_necessaria(
-            miei_esami, cfu_totali_corso, obiettivo_laurea
+        res_media_a = media_aritmetica(miei_esami)
+        res_media_p = calcola_media_ponderata(miei_esami)
+        res_proiezione = proiezione_voto_laurea(res_media_p)
+        res_progresso = analisi_avanzamento(miei_esami, CFU_TOTALI_CORSO)
+        res_media_req = stima_media_necessaria(
+            miei_esami, CFU_TOTALI_CORSO, OBIETTIVO_LAUREA
         )
-        lodi = sum(1 for e in miei_esami if e.lode)
+        n_lodi = sum(1 for e in miei_esami if e.lode)
 
         print("\n" + "=" * 40)
-        print("      --- IL TUO REPORT ---")
+        print("      --- LOADING 110 STATUS ---")
         print("=" * 40)
-        print(f"📊 Medie: Aritmetica: {media_a:.2f} | Ponderata: {media_p:.2f}")
+
+        print(f"📊 Medie: Aritmetica: {res_media_a:.2f} | Ponderata: {res_media_p:.2f}")
         print("   Le abbiamo calcolate noi, tu pensa a studiare!")
 
         print("-" * 40)
-        print(f"🔮 Leggiamo il futuro: Il tuo voto di partenza è {proiezione}/110")
+        print(f"🔮 Leggiamo il futuro: Il tuo voto di partenza è {res_proiezione}/110")
 
         print("-" * 40)
-        print(f"🎖️ Operazione Lode: Hai collezionato {lodi} lode/i.")
-        print(f"   Peso totale bonus: +{lodi * 0.5} punti sulla base laurea.")
+        print(f"🎖️ Operazione Lode: Hai collezionato {n_lodi} lode/i.")
+        print(f"   Peso totale bonus: +{n_lodi * 0.5} punti sulla base laurea.")
 
         print("-" * 40)
-        print(f"📉 {obiettivo_laurea}, l'obiettivo di tutti:")
-        print(f"   Devi mantenere una media di {media_necessaria}")
-        print(f"   nei restanti {info_progresso['cfu_mancanti']} CFU.")
+        print(f"📉 {OBIETTIVO_LAUREA}, l'obiettivo di tutti:")
+        print(f"   Devi mantenere una media di {res_media_req}")
+        print(f"   nei restanti {res_progresso['cfu_mancanti']} CFU.")
 
         print("-" * 40)
         print(
-            f"✅ Avanzamento: {info_progresso['percentuale_completamento']}% completato."
+            f"✅ Avanzamento: {res_progresso['percentuale_completamento']}% del percorso fatto."
         )
         print("=" * 40 + "\n")
     else:
-        print("\nNessun esame inserito. Alla prossima!")
+        print("\nNessun dato inserito. Arrivederci!")
