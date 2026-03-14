@@ -1,5 +1,11 @@
-from src.logic import Esame, media_aritmetica
-
+from src.logic import (
+    Esame,
+    media_aritmetica,
+    calcola_media_ponderata,
+    proiezione_voto_laurea,
+    analisi_avanzamento,
+    stima_media_necessaria
+)
 
 def test_media_aritmetica_semplice():
     lista_esami = [
@@ -7,9 +13,6 @@ def test_media_aritmetica_semplice():
         Esame(nome="Strutture Discrete", voto=30, cfu=6),
     ]
     assert media_aritmetica(lista_esami) == 27.0
-
-
-from src.logic import Esame, calcola_media_ponderata
 
 
 def test_media_ponderata_semplice():
@@ -42,9 +45,6 @@ def test_media_ponderata_pesi_diversi():
     assert media_a > media_b
 
 
-from src.logic import Esame, calcola_media_ponderata
-
-
 def test_media_ponderata_e_lode():
     esami = [
         Esame(nome="Analisi", voto=30, cfu=12, lode=True),  # 31 * 12 = 372
@@ -53,9 +53,6 @@ def test_media_ponderata_e_lode():
     # Totale punti: 480 / Totale CFU: 18 = 26.666...
     risultato = calcola_media_ponderata(esami)
     assert round(risultato, 2) == 26.67
-
-
-from src.logic import proiezione_voto_laurea
 
 
 def test_proiezione_voto_laurea():
@@ -70,3 +67,29 @@ def test_proiezione_voto_laurea():
     # Caso 3: Media del 25.5
     # 25.5 * 11 / 3 = 93.5
     assert proiezione_voto_laurea(25.5) == 93.5
+
+
+def test_analisi_avanzamento():
+    esami = [
+        Esame(nome="Esame 1", voto=24, cfu=12),
+        Esame(nome="Esame 2", voto=30, cfu=6)
+    ]
+    risultato = analisi_avanzamento(esami, 180)
+    
+    assert risultato["cfu_acquisiti"] == 18
+    assert risultato["cfu_mancanti"] == 162
+    assert risultato["percentuale_completamento"] == 10.0
+
+from src.logic import Esame, stima_media_necessaria
+
+def test_stima_media_necessaria():
+    # Studente con 2 lodi (quindi +1 punto bonus sul finale)
+    esami = [
+        Esame(nome="Esame 1", voto=30, cfu=12, lode=True),
+        Esame(nome="Esame 2", voto=30, cfu=12, lode=True)
+    ]
+    # Se l'obiettivo è 110, ma ha già 1 punto di bonus lodi, 
+    # gli serve arrivare a 109 con la media.
+    # (109 * 3) / 11 = 29.73
+    risultato = stima_media_necessaria(esami, 180, 110.0)
+    assert risultato == 29.73
