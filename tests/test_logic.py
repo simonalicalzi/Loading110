@@ -1,11 +1,6 @@
-from src.logic import (
-    Esame,
-    media_aritmetica,
-    calcola_media_ponderata,
-    proiezione_voto_laurea,
-    analisi_avanzamento,
-    stima_media_necessaria,
-)
+from src.logic import (Esame, analisi_avanzamento, calcola_media_ponderata,
+                       media_aritmetica, proiezione_voto_laurea,
+                       stima_media_necessaria)
 
 
 def test_media_aritmetica_semplice():
