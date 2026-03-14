@@ -1,6 +1,7 @@
 """
 Unit tests for the graduation utility logic functions.
 """
+
 import pytest
 
 from src.logic import (
