@@ -41,14 +41,39 @@ Loading110/
 └── 📄 setup.py                 # Configurazione installazione
 ```
 
-## 📝 Unit-Tests
+## 🚀Setup
+### 1. Clonare il progetto
+Se il PC ha Git installato, apri il terminale e scarica la cartella direttamente da GitHub:
 
-Abbiamo organizzato i test unitari per tutti i metodi utilizzati nell'app all'interno della cartella `tests/`. Per eseguire i test è necessario:
+```bash
+git clone https://github.com/simonalicalzi/Loading110.git
+cd Loading110
+```
+Se non hai Git, scarica semplicemente il file .zip dal pulsante verde "Code" su GitHub ed estrailo.
 
-### 1. Installare le dipendenze:
+### 2. Creare un Ambiente Virtuale 
+Windows: 
+```bash
+python -m venv venv e poi venv\Scripts\activate
+```
+Mac/Linux:
+```bash
+python3 -m venv venv e poi source venv/bin/activate
+```
+
+### 3. Installare:
 ```bash
 pip install -r requirements.txt
 ```
+
+### 4. Eseguire il codice
+Una volta dentro la cartella, lancia lo script principale:
+```bash
+python3 logic.py
+```
+
+## 📝 Unit-Tests
+Abbiamo organizzato i test per tutti i metodi utilizzati all'interno della cartella `tests/`. 
 
 I test possono essere eseguiti tutti insieme o singolarmente:
 
