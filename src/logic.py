@@ -54,7 +54,7 @@ def stima_media_necessaria(
 
 # --- INTERFACCIA DI INPUT E OUTPUT ---
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
     print("\n" + "=" * 40)
     print("   BENVENUTA IN LOADING 110! 🎓")
     print("=" * 40)
